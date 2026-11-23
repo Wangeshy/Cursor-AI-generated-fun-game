@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#07080c" />
+  <title>Arena One</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2307080c' width='32' height='32'/%3E%3Cpath d='M16 6 L26 16 L16 26 L6 16 Z' fill='none' stroke='%23ff4b2b' stroke-width='2'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="view" aria-hidden="true"></canvas>
+  <div id="hurt"></div>
+  <div id="fade"></div>
+
+  <div id="hud" class="hidden">
+    <div class="health foe">
+      <div class="row"><span>Warden</span><b id="enemy-num">100</b></div>
+      <div class="track"><span id="enemy-fill"></span></div>
+    </div>
+    <div class="clock" id="clock">0.0</div>
+    <div class="health you">
+      <div class="row"><span>You</span><b id="player-num">100</b></div>
+      <div class="track"><span id="player-fill"></span></div>
+    </div>
+    <div id="crosshair" aria-hidden="true">
+      <i></i><i></i><i></i><i></i>
+    </div>
+    <div id="cooldown" aria-hidden="true"><span id="cooldown-fill"></span></div>
+    <p id="lock">Lock</p>
+    <div id="tracker" class="hidden"><i></i></div>
+    <div id="hitmarker" aria-hidden="true"></div>
+    <canvas id="radar" width="148" height="148" aria-hidden="true"></canvas>
+    <p class="hint"><kbd>↑</kbd><kbd>↓</kbd> move <kbd>←</kbd><kbd>→</kbd> turn <kbd>Space</kbd> shoot <kbd>Esc</kbd> pause</p>
+    <p id="toast"></p>
+  </div>
+
+  <section id="menu">
+    <header class="topbar">
+      <span>Arena One</span>
+      <span>Duel 001</span>
+    </header>
+    <div class="poster">
+      <p class="kicker">3D first-person duel</p>
+      <h1>Arena<br />One</h1>
+      <p class="lede">One room. One opponent. Drop the warden before the warden drops you.</p>
+      <button type="button" id="play">Enter the arena</button>
+      <ul class="controls">
+        <li><kbd>↑</kbd><kbd>↓</kbd><span>Move</span></li>
+        <li><kbd>←</kbd><kbd>→</kbd><span>Turn</span></li>
+        <li><kbd>Space</kbd><span>Shoot</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="pause" class="hidden">
+    <div class="card">
+      <p class="kicker">Hold</p>
+      <h2>Paused</h2>
+      <div class="actions">
+        <button type="button" id="resume">Resume</button>
+        <button type="button" id="quit" class="ghost">Leave</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="end" class="hidden" role="dialog" aria-labelledby="end-title">
+    <div class="card">
+      <p class="kicker">Result</p>
+      <h2 id="end-title">Arena clear</h2>
+      <p id="end-sub"></p>
+      <div class="actions">
+        <button type="button" id="again">Rematch</button>
+        <button type="button" id="menu-btn" class="ghost">Menu</button>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="game.js"></script>
+</body>
+</html>
